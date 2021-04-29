@@ -14,6 +14,7 @@
                   Iniciar Sesión
               </router-link>
               <template v-if="token">
+                <span class="item">Nombre del Usuario</span>
                 <router-link class="item" to="/orders">Pedidos</router-link>
                 <span class="ui item cart" @click="openCart">
                   <i class="shopping cart icon"></i>
