@@ -7,7 +7,7 @@
           <input
             type="text"
             placeholder="Nombre de usuario"
-            v-model="formData.identifier"
+            v-model="formData.correo"
             :class="{ error: formError.identifier }"
           />
         </div>
@@ -27,7 +27,7 @@
           Entrar
         </button>
       </form>
-      <router-link to="/register"> Crear una cuenta </router-link>
+      <router-link to="/registro"> Crear una cuenta </router-link>
     </div>
     
  </BasicLayout>
@@ -58,7 +58,7 @@ export default {
     });
 
     const schemaForm = Yup.object().shape({
-      identifier: Yup.string().required(true),
+      correo: Yup.string().required(true),
       password: Yup.string().required(true),
     });
 
@@ -70,9 +70,10 @@ export default {
 
         try {
           const response = await loginApi(formData.value);
-          console.log(response);
-          if (!response?.jwt) throw "El usuario o contraseña no son validos";
-            setTokenApi(response.jwt);
+ 
+          if (!response.token) throw "El usuario o contraseña no son validos";
+            setTokenApi(response.token);
+            //console.log("token",TOKEN)
             router.push("/");
         } catch (error) {
           console.log(error);

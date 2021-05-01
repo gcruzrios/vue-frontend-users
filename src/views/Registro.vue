@@ -1,5 +1,5 @@
 <template>
-    <BasicLayout>
+  <BasicLayout>
         <div class="register">
             <h2>Registro de Usuarios</h2>
        
@@ -48,12 +48,10 @@
         <router-link to="/login">Iniciar Sesion</router-link>
       </div>
     </BasicLayout>
-
- </template>
+</template>
 
 <script>
-  
-  import { ref } from "vue";
+import { ref } from "vue";
   import { useRouter } from "vue-router";
   import * as Yup from "yup";
   import BasicLayout from "../layouts/BasicLayout";
@@ -124,6 +122,7 @@
 <style lang="scss" scoped>
 .register {
   text-align: center;
+   
   > h2 {
     margin: 50px 0 30px 0;
   }
@@ -138,4 +137,5 @@
     }
   }
 }
+
 </style>

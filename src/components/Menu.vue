@@ -14,11 +14,8 @@
                   Iniciar Sesión
               </router-link>
               <template v-if="token">
-                <span class="item">Nombre del Usuario</span>
-                <router-link class="item" to="/orders">Pedidos</router-link>
-                <span class="ui item cart" @click="openCart">
-                  <i class="shopping cart icon"></i>
-                </span>
+                
+                <span class="item">Usuario : {{ username }} </span>
                 <span class="ui item logout" @click="logout">
                   <i class="sign-out icon"></i>
                 </span>
@@ -31,12 +28,39 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
 import { getTokenApi, deleteTokenApi } from "../api/token";
+import { GetUserApi } from "../api/user";
+import jwtDecode from "jwt-decode";
+
 export default {
     name:"Menu",
     setup(){
+
+      const user = ref(null);
+      let username = ref("");
+      let id_user = ref(0);
+
       const token = getTokenApi();
       
+      onMounted(async () => {
+        if (token){
+          const { uid } = jwtDecode(token);
+          //console.log(uid)
+          
+          const responseUser = await GetUserApi(uid);
+          user.value = responseUser;
+          //console.log(user.value.usuario);
+          username.value = user.value.usuario.nombre;
+          //console.log(username.value);
+          id_user.value = uid;
+          
+        }
+      
+      });
+
+
       const logout = () => {
         deleteTokenApi();
         location.replace("/login");
@@ -44,7 +68,10 @@ export default {
       
       return{
         token,
-        logout
+        logout,
+        user,
+        username,
+        id_user
       }
     },
     
