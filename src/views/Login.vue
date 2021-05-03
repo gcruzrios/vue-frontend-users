@@ -72,10 +72,12 @@ export default {
           const response = await loginApi(formData.value);
  
           if (!response.token) throw "El usuario o contraseña no son validos";
+
             setTokenApi(response.token);
             //console.log("token",TOKEN)
             router.push("/");
         } catch (error) {
+          alert("Error de credenciales");
           console.log(error);
         }
       } catch (error) {

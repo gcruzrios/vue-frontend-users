@@ -1,0 +1,18 @@
+let apiURL = `${API_URL}/api/usuarios/${id_user}`;
+const params = {
+    headers: {
+    "Content-Type": "application/json",
+    "token": token,
+    }    
+};
+
+console.log(params)
+
+console.log(formData.value);
+//axios.post(apiURL, params, this.user).then((res) => {
+//axios.put(apiURL, params, formData.value).then((res) => {
+    
+    const response = await Up
+    
+    console.log(res)
+                

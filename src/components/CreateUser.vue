@@ -1,11 +1,10 @@
 <template>
-  <BasicLayout>
-        <div class="register">
-            <h2>Registro de Usuarios</h2>
+  <div class="register">
+        <h2>Registro de Usuarios</h2>
        
         <form class="ui form" @submit.prevent="register" 
               :class="{ error: formError.rol }">
-
+        
         <div class="ui selection" >
           <select class="ui dropdown" v-model="formData.rol">
             <option value="USER_ROLE" selected>Usuario Regular</option>
@@ -57,9 +56,7 @@
           Crear usuario
         </button>
       </form>
-        <router-link to="/login">Iniciar Sesion</router-link>
-      </div>
-    </BasicLayout>
+  </div>  
 </template>
 
 <script>
@@ -69,6 +66,7 @@
   import BasicLayout from "../layouts/BasicLayout";
   import { registerApi } from "../api/user";
   import { getTokenApi } from "../api/token";
+  
 
   export default {
     name:"Register",
@@ -108,7 +106,7 @@
             try {
               
               const response = await registerApi(formData.value);
-              router.push("/login");
+              router.push("/list-users");
             } catch (error) {
               console.log(error);
             }

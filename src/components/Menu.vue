@@ -5,7 +5,12 @@
           <div class="left menu">
               <router-link class="item" to="/">
                 <img class="ui small image" src="../assets/logo.png" alt="Sistema Vue"/>
-                <p>Categorias...</p>
+                <template v-if="token">
+                    <router-link class="item" to="/list-users">Usuarios</router-link>
+                    <router-link class="item" to="/list-categorias">Categorias</router-link>
+                    <router-link class="item" to="/list-productos">Productos</router-link>
+                    
+                </template>
               </router-link>
           </div>
           
@@ -16,9 +21,17 @@
               <template v-if="token">
                 
                 <span class="item">Usuario : {{ username }} </span>
+                <router-link class="item" to="/settings">
+                <i class="address book outline icon"></i>
+                
+                <router-link class="item" to="/about">
+                    <i class="copyright outline icon"></i>
+                </router-link>
+                </router-link>
                 <span class="ui item logout" @click="logout">
                   <i class="sign-out icon"></i>
                 </span>
+                
               </template>
              
           </div> 
@@ -47,13 +60,13 @@ export default {
       onMounted(async () => {
         if (token){
           const { uid } = jwtDecode(token);
-          //console.log(uid)
+         
           
           const responseUser = await GetUserApi(uid);
           user.value = responseUser;
-          //console.log(user.value.usuario);
+          
           username.value = user.value.usuario.nombre;
-          //console.log(username.value);
+          
           id_user.value = uid;
           
         }
@@ -90,14 +103,14 @@ export default {
   }
 
   .menu.left {
-    width: 50%;
+    width: 60%;
     .ui.image {
       width: 40px;
     }
   }
 
   .menu.right {
-    width: 50%;
+    width: 40%;
     justify-content: flex-end;
 
     .logout,
