@@ -1,7 +1,8 @@
 <template>
 
-<BasicLayout> 
-     <h1>settings</h1>
+  <BasicLayout> 
+     <h1>Settings</h1>
+     <update-password></update-password>
   </BasicLayout>
   
   
@@ -9,10 +10,41 @@
 
 <script>
 import BasicLayout from "../layouts/BasicLayout"
+import UpdatePassword from '../components/UpdatePassword'
+import { getTokenApi } from "../api/token";
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+
 export default {
   name: 'Settings',
   components: {
     BasicLayout,
+    UpdatePassword
+  },
+  setup(){
+    const router = useRouter();
+    const token = getTokenApi();
+
+    
+    onMounted(() => {
+      if (!token) return router.push("/login");
+
+      else{
+         return router.push("/settings");
+      }
+    
+    });
+  
+    // onMounted(() => {
+    //   if (!token) {
+    //       console.log("No hay token");
+    //       return router.push("/login") ;
+    //   }else{
+    //      //console.log(token);
+    //      return router.push("/settings");
+    //   }
+    
+    //});
   }
 }
 </script>

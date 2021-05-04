@@ -2,7 +2,7 @@
   <BasicLayout>
       <h1>List Users</h1>
       <lusers></lusers>
-      <!-- <list-users></list-users>  -->
+      
    </BasicLayout>
 </template>
 

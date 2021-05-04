@@ -8,7 +8,7 @@
             type="text"
             placeholder="Nombre de usuario"
             v-model="formData.correo"
-            :class="{ error: formError.identifier }"
+            :class="{ error: formError.correo }"
           />
         </div>
         <div class="field">
