@@ -1,55 +1,68 @@
 <template>
   <div class="register">
-              
-        <form class="ui form" @submit.prevent="Update" 
-              :class="{ error: formError.rol }">
         
-       
-        
-        
-        <div class="field">
-          <input
-            type="text"
-            placeholder="Nombre de usuario"
-            v-model="formData.nombre"
-            :class="{ error: formError.username }"
-          />
+        <template v-if="token">
+
+            <form class="ui form" @submit.prevent="Update" 
+                  :class="{ error: formError.rol }">
+            
+          
+            
+            
+            <div class="field">
+              <input
+                type="text"
+                placeholder="Nombre de usuario"
+                v-model="formData.nombre"
+                :class="{ error: formError.username }"
+              />
+            </div>
+            <div class="field">
+              <input
+                type="text"
+                disabled
+                placeholder="Correo electronico"
+                v-model="formData.correo"
+                :class="{ error: formError.email }"
+                />
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                placeholder="Contraseña"
+                v-model="formData.password"
+                :class="{ error: formError.password }"
+                />
+            </div>
+            <div class="field">
+            <input
+              type="password"
+              placeholder="Repetir contraseña"
+              v-model="formData.repeatPassword"
+              :class="{ error: formError.repeatPassword }"
+              />
+            </div> 
+            
+            
+            <button
+              type="submit"
+              class="ui button fluid primary"
+              :class="{ loading }"
+            >
+              Editar usuario
+            </button>
+          </form>
+      </template>
+      <template v-if="!token">
+        <div text-danger>
+          Error no estás autenticado para hacer esta operación
+        <br/>
+     
         </div>
-        <div class="field">
-          <input
-            type="text"
-            disabled
-            placeholder="Correo electronico"
-            v-model="formData.correo"
-            :class="{ error: formError.email }"
-            />
-        </div>
-        <div class="field">
-          <input
-            type="password"
-            placeholder="Contraseña"
-            v-model="formData.password"
-            :class="{ error: formError.password }"
-            />
-        </div>
-        <div class="field">
-        <input
-          type="password"
-          placeholder="Repetir contraseña"
-          v-model="formData.repeatPassword"
-          :class="{ error: formError.repeatPassword }"
-          />
-        </div> 
-        
-        
-        <button
-          type="submit"
-          class="ui button fluid primary"
-          :class="{ loading }"
-        >
-          Editar usuario
-        </button>
-      </form>
+           <router-link to="/login">Iniciar Sesion</router-link>
+      
+      </template>
+
   </div> 
 </template>
 
